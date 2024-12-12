@@ -11,7 +11,7 @@ default_args = {
     'retry_delay': timedelta(seconds=5)
 }
 
-with DAG('my_dag', default_args=default_args, schedule_interval='@daily', catchup=False) as dag:
+with DAG('my_dag3', default_args=default_args, schedule_interval='@daily', catchup=False) as dag:
     t0 = BashOperator(task_id='ls_data', bash_command='ls -l /tmp', retries=2, retry_delay=timedelta(seconds=15))
 
     t1 = BashOperator(task_id='download_data',
