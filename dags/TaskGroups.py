@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'C:\Users\User\airflow-git-sync\airflow-git-sync\dags\groups')
+sys.path.append('/opt/airflow/code_base/airflow-git-sync/dags/groups')
 
 from group_downloads import download_tasks
 
