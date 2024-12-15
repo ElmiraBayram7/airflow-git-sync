@@ -14,7 +14,9 @@ def from_github_to_postgresql_staging(**kwargs):
     base_url = kwargs['base_url']
     schema = kwargs['schema']
     table_name = kwargs['table_name']
-    engine = kwargs['engine']    
+    engine = kwargs['engine']
+
+    #do this
     df = pd.read_csv(base_url)
     # Veriyi PostgreSQL'e yazma
     df.to_sql(name=table_name, con=engine, schema=schema, if_exists='replace', index=False)
