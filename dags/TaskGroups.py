@@ -1,9 +1,12 @@
 import sys
-sys.path.append(r'C:\Users\User\airflow-git-sync\airflow-git-sync\dags')
+sys.path.append(r'C:\Users\User\airflow-git-sync\airflow-git-sync\dags\groups')
+
+from group_downloads import download_tasks
+
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from groups.group_downloads import download_tasks
+
 from datetime import datetime
 
 with DAG('group_dag', start_date=datetime(2022, 1, 1),
