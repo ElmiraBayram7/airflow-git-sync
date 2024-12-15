@@ -2,8 +2,6 @@ import sys
 sys.path.append('/opt/airflow/code_base/airflow-git-sync/dags/groups')
 
 from group_downloads import download_tasks
-
-
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
