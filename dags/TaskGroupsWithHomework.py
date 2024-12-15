@@ -23,7 +23,7 @@ default_args = {
 }
 
 # DAG'ın tanımlanması
-with DAG(dag_id='airflow_hw1_dag', default_args=default_args, schedule_interval='@hourly', catchup=False) as dag:
+with DAG(dag_id='GroupTaskWithHomework', default_args=default_args, schedule_interval='@hourly', catchup=False) as dag:
 
     # Schema oluşturma görevleri
     t1 = PostgresOperator(
