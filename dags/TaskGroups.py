@@ -1,7 +1,7 @@
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
-from group.group_downloads import download_tasks
+from groups.group_downloads import download_tasks
 
 start_date = datetime(2024, 10, 11)
 
