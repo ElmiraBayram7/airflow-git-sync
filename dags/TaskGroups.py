@@ -1,24 +1,21 @@
 from airflow import DAG
-from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
 from groups.group_downloads import download_tasks
+from datetime import datetime
 
-start_date = datetime(2024, 10, 11)
+with DAG('group_dag', start_date=datetime(2022, 1, 1),
+         schedule_interval='@daily', catchup=False) as dag:
 
-default_args = {
-    'owner': 'airflow',
-    'start_date': start_date,
-    'retries': 1,
-    'retry_delay': timedelta(seconds=5)
-}
+    args = {'start_date': dag.start_date, 'schedule_interval': dag.schedule_interval, 'catchup': dag.catchup}
 
-with DAG('my_dag', default_args=default_args, schedule_interval='@daily', catchup=False) as dag:
+    # `download_tasks` fonksiyonunu çağırıyoruz
+    downloads = download_tasks()
 
-    downloads=download_tasks
+    # `check_files` görevi
+    check_files = BashOperator(
+        task_id='check_files',
+        bash_command='sleep 10'
+    )
 
-    check_files=BashOperator(task_id='check_file_exists', bash_command='sha256sum /tmp/dirty_store_transactions.csv /tmp/Churn_Modelling.csv',
-                      retries=2, retry_delay=timedelta(seconds=15))
-
-    
-    
-    downloads>>check_files
+    # Görevlerin sıralaması: downloads -> check_files
+    downloads >> check_files
